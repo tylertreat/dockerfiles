@@ -1,0 +1,18 @@
+WSGISocketPrefix /var/run/wsgi
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@mydomain
+    ServerName mydomain.com
+
+    WSGIDaemonProcess application user=www-data group=www-data threads=5
+    WSGIScriptAlias / /var/www/application/application.wsgi
+    <Directory /var/www/application>
+        WSGIProcessGroup application
+        WSGIApplicationGroup %{GLOBAL}
+        Order deny,allow
+        Allow from all
+    </Directory>
+
+    ErrorLog /logs/error.log
+    
+</VirtualHost>
